@@ -1,4 +1,4 @@
-# EPC-3D-Diff
+# EPC-3D-Diff: Equivariant Physics Consistent Conditional 3D Latent Diffusion for CBCT to CT Synthesis
 
 [![arXiv](https://img.shields.io/badge/arXiv-2605.20470-b31b1b.svg)](https://arxiv.org/abs/2605.20470)
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-blue.svg)](https://www.mozilla.org/MPL/2.0/)
