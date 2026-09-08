@@ -40,7 +40,7 @@ After latent denoising, the decoder maps the recovered latent representation bac
 
 The following diagram provides an overview of the EPC-3D-Diff training and inference workflow:
 
-![EPC-3D-Diff methodology overview](assets/figures/Methodology.png)
+![EPC-3D-Diff methodology overview](Methodology.png)
 
 *Figure 1. Overview of EPC-3D-Diff. The framework encodes CT and CBCT volumes into a latent space, performs conditional diffusion with CBCT guidance, decodes the recovered latent representation into synthetic CT, and enforces projection-domain rotational equivariance through the physics-based operator pathway during training.*
 
