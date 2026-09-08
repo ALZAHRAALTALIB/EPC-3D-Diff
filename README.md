@@ -1,4 +1,4 @@
-# EPC-3D-Diff
+# EPC-3D-Diff: Equivariant Physics Consistent Conditional 3D Latent Diffusion for CBCT to CT Synthesis.
 
 [![arXiv](https://img.shields.io/badge/arXiv-2605.20470-b31b1b.svg)](https://arxiv.org/abs/2605.20470)
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-blue.svg)](https://www.mozilla.org/MPL/2.0/)
@@ -40,7 +40,7 @@ After latent denoising, the decoder maps the recovered latent representation bac
 
 The following diagram provides an overview of the EPC-3D-Diff training and inference workflow:
 
-![EPC-3D-Diff methodology overview](assets/figures/fig1_methodology.png)
+![EPC-3D-Diff methodology overview](assets/figures/Methodology.png)
 
 *Figure 1. Overview of EPC-3D-Diff. The framework encodes CT and CBCT volumes into a latent space, performs conditional diffusion with CBCT guidance, decodes the recovered latent representation into synthetic CT, and enforces projection-domain rotational equivariance through the physics-based operator pathway during training.*
 
