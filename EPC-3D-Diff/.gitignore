@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+env/
+conda-env/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Data and medical images
+data/
+datasets/
+*.dcm
+*.mha
+*.mhd
+*.nii
+*.nii.gz
+*.mat
+*.npy
+*.npz
+
+# Model checkpoints / training outputs
+checkpoints*/
+results*/
+runs/
+wandb/
+*.pth
+*.pt
+*.ckpt
+
+# Generated figures / logs
+*.log
+loss.txt
+all_losses.txt
+metrics_log.txt
+volume_eval_log.txt

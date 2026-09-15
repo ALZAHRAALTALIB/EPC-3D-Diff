@@ -1,0 +1,16 @@
+# Core numerical / imaging dependencies
+numpy
+scipy
+scikit-image
+matplotlib
+tqdm
+pydicom
+h5py
+pytorch-msssim
+
+# Install PyTorch separately for the CUDA version available on your system:
+# https://pytorch.org/get-started/locally/
+#
+# ASTRA Toolbox is also required for projection-domain training and is
+# commonly installed through conda. See:
+# https://astra-toolbox.com/
