@@ -4,9 +4,9 @@
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-blue.svg)](https://www.mozilla.org/MPL/2.0/)
 [![MICCAI 2026](https://img.shields.io/badge/MICCAI-2026-4c7bd9.svg)](https://miart-workshop.github.io/)
 
-Official research-code release for **EPC-3D-Diff: Equivariant Physics Consistent Conditional 3D Latent Diffusion for CBCT to CT Synthesis**.
+Official research code release for **EPC-3D-Diff: Equivariant Physics Consistent Conditional 3D Latent Diffusion for CBCT to CT Synthesis**.
 
-**EPC-3D-Diff** is a conditional 3D latent diffusion framework for volumetric CBCT-to-CT synthesis. The method introduces a **projection-domain rotational equivariance constraint** derived from CT acquisition physics, while retaining efficient **operator-free inference** from CBCT input.
+**EPC-3D-Diff** is a conditional 3D latent diffusion framework for volumetric CBCT to CT synthesis. The method introduces a **projection domain rotational equivariance constraint** derived from CT acquisition physics, while retaining efficient **operator free inference** from CBCT input.
 
 > **Publication status:** accepted to the **Medical Image AI in Radiation Therapy (MIART) Workshop at MICCAI 2026**.  
 > **Preprint:** [arXiv:2605.20470](https://arxiv.org/abs/2605.20470)
@@ -15,15 +15,15 @@ Official research-code release for **EPC-3D-Diff: Equivariant Physics Consistent
 
 ## Overview
 
-Cone-beam CT (CBCT) is widely used for image-guided radiotherapy, but scatter, noise, beam-hardening effects, and reconstruction artefacts can degrade Hounsfield Unit (HU) accuracy. EPC-3D-Diff learns to synthesize CT-quality volumes from CBCT while incorporating acquisition physics as a structural constraint during training.
+Cone-beam CT (CBCT) is widely used for image guided radiotherapy, but scatter, noise, beam hardening effects, and reconstruction artefacts can degrade Hounsfield Unit (HU) accuracy. EPC-3D-Diff learns to synthesize CT quality volumes from CBCT while incorporating acquisition physics as a structural constraint during training.
 
 The framework combines:
 
-- **3D latent conditional diffusion** for volumetric CBCT-to-CT synthesis.
-- A **lightweight 3D autoencoder** that preserves axial depth while reducing in-plane spatial resolution.
+- **3D latent conditional diffusion** for volumetric CBCT to CT synthesis.
+- A **lightweight 3D autoencoder** that preserves axial depth while reducing in plane spatial resolution.
 - A **conditional 3D U-Net** operating on CT and CBCT latent representations.
-- **Projection-domain rotational equivariance**, exploiting the relationship between in-plane volume rotation and angular shifts in CT projections.
-- **Image-domain structural regularization** using reconstruction, edge, and Laplacian terms.
+- **Projection domain rotational equivariance**, exploiting the relationship between in plane volume rotation and angular shifts in CT projections.
+- **Image domain structural regularization** using reconstruction, edge, and Laplacian terms.
 - **DDIM inference** using only the CBCT input; projection operators are not required at test time.
 
 ---
@@ -32,7 +32,7 @@ The framework combines:
 
 Let \(x_0\) denote the reference CT volume and \(x_c\) the paired CBCT volume. A lightweight 3D encoder maps both volumes into compact latent representations \(z_0\) and \(z_c\). Diffusion is performed in latent space, and a conditional 3D U-Net predicts the injected noise using the noisy CT latent, timestep embedding, and CBCT latent condition.
 
-The key physics-consistent component is the projection equivariance constraint. For an in-plane rotation \(R_\phi\), the CT acquisition operator \(A_0\) satisfies the corresponding angular-shift relation in projection space. EPC-3D-Diff therefore encourages the projection of a rotated synthesized CT to agree with the appropriately shifted projection of the reference CT.
+The key physics consistent component is the projection equivariance constraint. For an in plane rotation \(R_\phi\), the CT acquisition operator \(A_0\) satisfies the corresponding angular shift relation in projection space. EPC-3D-Diff therefore encourages the projection of a rotated synthesized CT to agree with the appropriately shifted projection of the reference CT.
 
 After latent denoising, the decoder maps the recovered latent representation back to a synthetic CT volume. During inference, only CBCT is required.
 
@@ -42,7 +42,7 @@ The following diagram provides an overview of the EPC-3D-Diff training and infer
 
 ![EPC-3D-Diff methodology overview](Methodology.png)
 
-*Figure 1. Overview of EPC-3D-Diff. The framework encodes CT and CBCT volumes into a latent space, performs conditional diffusion with CBCT guidance, decodes the recovered latent representation into synthetic CT, and enforces projection-domain rotational equivariance through the physics-based operator pathway during training.*
+*Figure 1. Overview of EPC-3D-Diff. The framework encodes CT and CBCT volumes into a latent space, performs conditional diffusion with CBCT guidance, decodes the recovered latent representation into synthetic CT, and enforces projection domain rotational equivariance through the physics based operator pathway during training.*
 
 ---
 
@@ -89,7 +89,7 @@ conda activate epc3ddiff
 
 ### 3. Install ASTRA Toolbox
 
-EPC-3D-Diff uses ASTRA-based forward projection during physics-consistent training. Install an ASTRA build compatible with your CUDA environment by following the official ASTRA Toolbox installation instructions.
+EPC-3D-Diff uses ASTRA based forward projection during physics consistent training. Install an ASTRA build compatible with your CUDA environment by following the official ASTRA Toolbox installation instructions.
 
 ### 4. Install Python dependencies
 
@@ -107,18 +107,18 @@ The datasets used in the study are **not distributed in this repository**.
 
 ### NWH phantom cohort
 
-The Ninewells (Dundee) phantom cohort contains paired CBCT/CT image-domain data together with raw projection-domain information. The study uses patient-wise training and testing splits.
+The Ninewells (Dundee) phantom cohort contains paired CBCT and CT image domain data together with raw projection domain information. The study uses patient wise training and testing splits.
 
 ### JUST clinical cohort
 
-The JUST clinical cohort contains paired head-and-neck CBCT/CT volumes acquired at King Abdullah University Hospital, Jordan. The study also uses patient-wise training and testing splits.
+The JUST clinical cohort contains paired head and neck CBCT and CT volumes acquired at King Abdullah University Hospital, Jordan. The study also uses patient wise training and testing splits.
 
 ### Preprocessing used in the study
 
 The released preprocessing code includes:
 
-- paired CBCT/CT stack alignment;
-- correction for possible stack reversal and in-plane offsets;
+- paired CBCT and CT stack alignment;
+- correction for possible stack reversal and in plane offsets;
 - conversion to HU where required;
 - clipping to **[-1000, 2000] HU**;
 - linear normalization to **[-1, 1]**;
@@ -136,7 +136,7 @@ The paper uses a lightweight latent autoencoder followed by conditional 3D diffu
 Before training the diffusion model, ensure that:
 
 1. the required `src/` and `ops/` modules are present;
-2. the NWH/JUST dataset paths are configured;
+2. the NWH and JUST dataset paths are configured;
 3. the ASTRA geometry files match the acquisition setup;
 4. the pretrained latent autoencoder checkpoint is available, or autoencoder pretraining is enabled.
 
@@ -148,14 +148,14 @@ python train.py
 
 The current script contains configuration variables for:
 
-- dataset selection (`NWH`, `JUST`, or mixed-domain training);
+- dataset selection (`NWH`, `JUST`, or mixed domain training);
 - latent dimensionality;
 - diffusion epochs and checkpoint resume;
-- physics-consistency terms;
-- projection-domain equivariance frequency;
+- physics consistency terms;
+- projection domain equivariance frequency;
 - GPU selection.
 
-For a final public release, these options should be moved to command-line arguments or a YAML configuration file.
+For a final public release, these options should be moved to command line arguments or a YAML configuration file.
 
 ---
 
@@ -177,7 +177,7 @@ The testing pipeline performs 3D latent DDIM sampling and reports quantitative c
 - HU line profiles;
 - absolute difference maps.
 
-The test-time synthesis path uses only the CBCT condition. Reference CT is used only for retrospective evaluation.
+The test time synthesis path uses only the CBCT condition. Reference CT is used only for retrospective evaluation.
 
 ---
 
@@ -197,15 +197,15 @@ The paper reports:
 | Learning rate | \(10^{-5}\) |
 | Diffusion training | 2500 epochs |
 | DDIM inference | 100 steps |
-| Input in-plane size | 256 × 256 |
+| Input in plane size | 256 × 256 |
 
-For mixed-domain training, balanced mini-batches are used to prevent the larger cohort from dominating optimization.
+For mixed domain training, balanced mini batches are used to prevent the larger cohort from dominating optimization.
 
 ---
 
 ## Reported results
 
-On the NWH phantom test set, the paper reports the following multiple-domain training results:
+On the NWH phantom test set, the paper reports the following multiple domain training results:
 
 | Method | PSNR (dB) | SSIM |
 |---|---:|---:|
@@ -244,7 +244,7 @@ This source code is released under the **Mozilla Public License 2.0 (MPL-2.0)**.
 
 ## Disclaimer
 
-This repository contains research software. It is **not a medical device**, has not been validated for clinical decision-making, and should not be used directly for patient diagnosis or treatment without appropriate independent validation and regulatory review.
+This repository contains research software. It is **not a medical device**, has not been validated for clinical decision making, and should not be used directly for patient diagnosis or treatment without appropriate independent validation and regulatory review.
 
 ---
 
